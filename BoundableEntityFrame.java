@@ -31,8 +31,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if(boundedNorth()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.y <= y) {
-					e.y = y;
+				if (e.y <= 0) {
+					e.y = 0;
 					e.vy = -e.vy;
 				}
 			}
@@ -40,8 +40,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedSouth()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.y + e.height >= y + height) {
-					e.y = y + height - e.height;
+				if (e.y + e.height >= height) {
+					e.y = height - e.height;
 					e.vy = -e.vy;
 				}
 			}
@@ -49,8 +49,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedEast()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.x + e.width >= x + width) {
-					e.x = x + width - e.width;
+				if (e.x + e.width >= width) {
+					e.x = width - e.width;
 					e.vx = -e.vx;
 				}
 			}
@@ -58,8 +58,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedWest()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.x <= x) {
-					e.x = x;
+				if (e.x <= 0) {
+					e.x = 0;
 					e.vx = -e.vx;
 				}
 			}

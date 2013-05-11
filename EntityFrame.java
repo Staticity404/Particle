@@ -42,5 +42,7 @@ public class EntityFrame {
 		for (int i = ents.size() - 1; i >= 0; i--) {
 			ents.get(i).draw(g, x, y);
 		}
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, width, height);
 	}
 }
