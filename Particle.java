@@ -4,10 +4,10 @@ import java.awt.Graphics;
 public class Particle extends Circle {
 
 	public Particle(double x, double y, double radius, Color color) {
-		this(x, y, radius, 0, 0, color)
+		this(x, y, 0, 0, radius, color);
 	}
 
-	public Particle(double x, double y, double radius, double vx, double vy, Color color) {
+	public Particle(double x, double y, double vx, double vy, double radius, Color color) {
 		super(x, y, radius, color);
 		this.vx = vx;
 		this.vy = vy;

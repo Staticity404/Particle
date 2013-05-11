@@ -17,10 +17,10 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		super(x, y, width, height, color);
 	}
 
-	public boolean boundedNorth();
-	public boolean boundedSouth();
-	public boolean boundedEast();
-	public boolean boundedWest();
+	public abstract boolean boundedNorth();
+	public abstract boolean boundedSouth();
+	public abstract boolean boundedEast();
+	public abstract boolean boundedWest();
 
 	public void update() {
 		super.update();
@@ -40,8 +40,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedSouth()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.y >= y) {
-					e.y = y;
+				if (e.y + e.height >= y + height) {
+					e.y = y + height - e.height;
 					e.vy = -e.vy;
 				}
 			}
@@ -49,8 +49,8 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedEast()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.y >= x) {
-					e.x = x;
+				if (e.x + e.width >= x + width) {
+					e.x = x + width - e.width;
 					e.vx = -e.vx;
 				}
 			}
@@ -58,7 +58,7 @@ public abstract class BoundableEntityFrame extends EntityFrame {
 		if (boundedWest()) {
 			for (int i = ents.size() - 1; i >= 0; i--) {
 				Entity e = ents.get(i);
-				if (e.y <= x) {
+				if (e.x <= x) {
 					e.x = x;
 					e.vx = -e.vx;
 				}

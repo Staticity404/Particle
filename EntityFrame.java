@@ -22,13 +22,22 @@ public class EntityFrame {
 		this.ents = new ArrayList<Entity>();
 	}
 
-	public void upate() {
+	public void add(Entity e) {
+		ents.add(e);
+	}
+
+	public void clear() {
+		ents.clear();
+	}
+
+	public void update() {
 		for (int i = ents.size() - 1; i >= 0; i--) {
 			ents.get(i).update();
 		}
 	}
 
 	public void draw(Graphics g) {
+		g.setColor(color);
 		g.fillRect(x, y, width, height);
 		for (int i = ents.size() - 1; i >= 0; i--) {
 			ents.get(i).draw(g, x, y);

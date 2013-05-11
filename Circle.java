@@ -10,13 +10,11 @@ public class Circle extends Entity {
 	}
 
 	public Circle(double x, double y, double radius, Color color) {
-		super(x, y, color);
+		super(x, y, 0, 0, radius * 2, radius * 2, color);
 		this.radius = radius;
 	}
 
-	public void update() {
-
-	}
+	public void update() {}
 
 	public void draw(Graphics g, int x, int y) {
 		int x1 = (int)this.x + x;

@@ -1,4 +1,14 @@
+import java.awt.Color;
+
 public class BoundedEntityFrame extends BoundableEntityFrame {
+
+	public BoundedEntityFrame(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+
+	public BoundedEntityFrame(int x, int y, int width, int height, Color color) {
+		super(x, y, width, height, color);
+	}
 
 	public boolean boundedNorth() {
 		return true;
