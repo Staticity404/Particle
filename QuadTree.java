@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.Graphics;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,9 +53,9 @@ public class QuadTree {
 		nodes[BOT_RIGHT] = new QuadTree(new Rectangle2D.Double(x + hWidth, y + hHeight, hWidth, hHeight), level + 1);
 	}
 
-	public void insert(Collection<Entity> ents) {
-		for (Entity e : ents) {
-			insert(e);
+	public void insert(List<Entity> ents) {
+		for (int i = ents.size() - 1; i >= 0; i--) {
+			insert(ents.get(i));
 		}
 	}
 
