@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
 
 public class BoundedEntityFrame extends BoundableEntityFrame {
 

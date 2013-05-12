@@ -1,5 +1,6 @@
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class QuadTree {
@@ -32,8 +33,10 @@ public class QuadTree {
 	public void clear() {
 		ents.clear();
 		for (int i = 0; i < nodes.length; i++) {
-			nodes[i].clear();
-			nodes[i] = null;
+			if (nodes[i] != null) {
+				nodes[i].clear();
+				nodes[i] = null;
+			}
 		}
 	}
 
@@ -43,10 +46,16 @@ public class QuadTree {
 		double hWidth = bounds.width / 2;
 		double hHeight = bounds.height / 2;
 
-		nodes[TOP_LEFT] = new QuadTree(new Rectangle2D.Double(x, y, hWidth, hHeight), level);
-		nodes[TOP_RIGHT] = new QuadTree(new Rectangle2D.Double(x + hWidth, y, hWidth, hHeight), level);
-		nodes[BOT_LEFT] = new QuadTree(new Rectangle2D.Double(x, y + hHeight, hWidth, hHeight), level);
-		nodes[BOT_RIGHT] = new QuadTree(new Rectangle2D.Double(x + hWidth, y + hHeight, hWidth, hHeight), level);
+		nodes[TOP_LEFT] = new QuadTree(new Rectangle2D.Double(x, y, hWidth, hHeight), level + 1);
+		nodes[TOP_RIGHT] = new QuadTree(new Rectangle2D.Double(x + hWidth, y, hWidth, hHeight), level + 1);
+		nodes[BOT_LEFT] = new QuadTree(new Rectangle2D.Double(x, y + hHeight, hWidth, hHeight), level + 1);
+		nodes[BOT_RIGHT] = new QuadTree(new Rectangle2D.Double(x + hWidth, y + hHeight, hWidth, hHeight), level + 1);
+	}
+
+	public void insert(Collection<Entity> ents) {
+		for (Entity e : ents) {
+			insert(e);
+		}
 	}
 
 	public void insert(Entity e) {
@@ -107,11 +116,11 @@ public class QuadTree {
 		} 
 	}
 
-	public List<Entity> retrieve(Entity e) {
-		return retrieve(e, new ArrayList<Entity>());
+	public List<Entity> retrieveNeighbors(Entity e) {
+		return retrieveNeighbors(e, new ArrayList<Entity>());
 	}
 
-	private List<Entity> retrieve(Entity e, List<Entity> collection) {
+	private List<Entity> retrieveNeighbors(Entity e, List<Entity> collection) {
 		collection.addAll(ents);
 		
 		if (nodes[0] == null) {
@@ -123,7 +132,7 @@ public class QuadTree {
 		if (index == SELF) {
 			return collection;
 		} else {
-			nodes[index].retrieve(e, collection);
+			nodes[index].retrieveNeighbors(e, collection);
 		}
 
 		return collection;

@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
 
 public abstract class CollisionFrame extends BoundableEntityFrame {
 	

@@ -9,16 +9,16 @@ import java.lang.Thread;
 
 public class Test extends JFrame implements MouseListener {
 
-	public BoundedEntityFrame[] frames;
+	public BoundableEntityFrame[] frames;
 
 	public Test(int width, int height) {
 		super("Test..");
 
-		frames = new BoundedEntityFrame[4];
+		frames = new BoundableEntityFrame[4];
 
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
-				frames[i * 2 + j] = new BoundedEntityFrame((width / 2) * i, (height / 2) * j, width / 2, height / 2);
+				frames[i * 2 + j] = new QuadTreeCollisionFrame((width / 2) * i, (height / 2) * j, width / 2, height / 2);
 			}
 		}
 

@@ -12,4 +12,5 @@ public abstract class CollisionEngine {
 	}
 
 	public abstract void update();
+	public abstract void clear();
 }

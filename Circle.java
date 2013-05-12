@@ -26,5 +26,7 @@ public class Circle extends Entity {
 
 		g.setColor(Color.BLACK);
 		g.drawOval(x1, y1, d, d);
+
+		g.drawRect((int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height);
 	}
 }
