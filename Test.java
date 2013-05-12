@@ -14,16 +14,11 @@ public class Test extends JFrame implements MouseListener {
 	public Test(int width, int height) {
 		super("Test..");
 
-		frames = new BoundableEntityFrame[4];
-
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 2; j++) {
-				frames[i * 2 + j] = new QuadTreeCollisionFrame((width / 2) * i, (height / 2) * j, width / 2, height / 2);
-			}
-		}
+		frames = new BoundableEntityFrame[1];
+		frames[0] = new QuadTreeCollisionFrame(0, 0, width, height);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(width, height);
+		setSize(width, height + 22);
 		setVisible(true);
 		setResizable(true);
 
@@ -37,7 +32,7 @@ public class Test extends JFrame implements MouseListener {
 			}
 			repaint();
 			try {
-				Thread.sleep(1000 / 30);
+				Thread.sleep(1000 / 100);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -51,23 +46,18 @@ public class Test extends JFrame implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		int row = e.getY() / (getWidth() / 2);
-		int col = e.getX() / (getHeight() / 2);
-		int cell = 2 * col + row;
+		double x1 = e.getX() - 5;
+		double y1 = e.getY() - 22;
+		double rvx = (int)(Math.random() * 6) - 3;
+		double rvy = (int)(Math.random() * 6) - 3;
 
-		double x1 = e.getX() - frames[cell].bounds.x;
-		double y1 = e.getY() - frames[cell].bounds.y;
-
-		double rvx = Math.random() * 4 - 2;
-		double rvy = Math.random() * 4 - 2;
-
-		int rrad = 5 + (int)(Math.random() * 10);
+		int rrad = 5;
 
 		int r = (int)(Math.random() * 256);
 		int g = (int)(Math.random() * 256);
 		int b = (int)(Math.random() * 256);
 
-		frames[cell].add(new Particle(x1, y1, rvx, rvy, rrad, new Color(r, g, b)));
+		frames[0].add(new Particle(x1, y1, rvx, rvy, rrad, new Color(r, g, b)));
 		repaint();
 	}
 
@@ -75,7 +65,7 @@ public class Test extends JFrame implements MouseListener {
 	
 	public void mouseExited(MouseEvent e) {
 		for (int i = 0; i < frames.length; i++) {
-			frames[i].clear();
+			// frames[i].clear();
 		}
 	}
 	
@@ -83,7 +73,7 @@ public class Test extends JFrame implements MouseListener {
 	public void mouseReleased(MouseEvent e) {}
 
 	public static void main(String args[]) {
-		Test t = new Test(1000, 1000);
+		Test t = new Test(750, 750);
 		t.run();
 	}
 }

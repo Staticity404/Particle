@@ -22,11 +22,9 @@ public class Circle extends Entity {
 		int d = (int)(radius * 2);
 
 		g.setColor(color);
-		g.fillOval(x1, y1, d, d);
+		g.fillRect(x1, y1, d, d);
 
 		g.setColor(Color.BLACK);
-		g.drawOval(x1, y1, d, d);
-
-		g.drawRect((int)bounds.x, (int)bounds.y, (int)bounds.width, (int)bounds.height);
+		g.drawRect(x1, y1, d, d);
 	}
 }

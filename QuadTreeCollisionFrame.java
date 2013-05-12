@@ -23,6 +23,11 @@ public class QuadTreeCollisionFrame extends CollisionFrame {
 		this.engine = new QuadTreeCollisionEngine(bounds, ents);
 	}
 
+	public void update() {
+		engine.clear();
+		super.update();
+	}
+
 	public void clear() {
 		super.clear();
 		engine.clear();

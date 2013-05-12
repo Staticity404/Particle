@@ -1,4 +1,5 @@
 import java.awt.geom.Rectangle2D;
+import java.awt.Graphics;
 import java.util.List;
 
 public class QuadTreeCollisionEngine extends CollisionEngine {
@@ -20,7 +21,6 @@ public class QuadTreeCollisionEngine extends CollisionEngine {
 		for (int i = 0; i < ents.size(); i++) {
 			Entity e = ents.get(i);
 			List<Entity> relative = tree.retrieveNeighbors(e);
-
 			for (int j = 0; j < relative.size(); j++) {
 				Entity neighbor = relative.get(j);
 				if (neighbor != e) {
@@ -33,5 +33,9 @@ public class QuadTreeCollisionEngine extends CollisionEngine {
 				}
 			}
 		}
+	}
+
+	public void draw(Graphics g) {
+		tree.draw(g);
 	}
 }

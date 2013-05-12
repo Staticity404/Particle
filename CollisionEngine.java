@@ -1,4 +1,5 @@
 import java.awt.geom.Rectangle2D;
+import java.awt.Graphics;
 import java.util.List;
 
 public abstract class CollisionEngine {
@@ -13,4 +14,5 @@ public abstract class CollisionEngine {
 
 	public abstract void update();
 	public abstract void clear();
+	public abstract void draw(Graphics g);
 }

@@ -1,11 +1,13 @@
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
+import java.awt.Graphics;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 public class QuadTree {
 
-	public static final int MAX_ENTITIES = 10;
+	public static final int MAX_ENTITIES = 2;
 	public static final int MAX_LEVELS = 5;
 
 	public static final int SELF = -1;
@@ -24,7 +26,7 @@ public class QuadTree {
 	}
 
 	private QuadTree(Rectangle2D.Double bounds, int level) {
-		this.ents = new ArrayList<Entity>();
+		this.ents = new LinkedList<Entity>();
 		this.nodes = new QuadTree[4];
 		this.bounds= bounds;
 		this.level = level;
@@ -86,18 +88,18 @@ public class QuadTree {
 	}
 
 	private int getIndex(Entity e) {
-		double mX = bounds.width / 2;
-		double mH = bounds.height / 2;
+		double mW = bounds.x + bounds.width / 2;
+		double mH = bounds.y + bounds.height / 2;
 		
 		double x = e.bounds.x;
 		double y = e.bounds.y;
 		double w = e.bounds.width;
 		double h = e.bounds.height;
 
-		boolean top = (y > mH) && (y + h > mH);
-		boolean bot = (y < mH) && (y + h < mH);
-		boolean left = (x < mX) && (x + h < mX);
-		boolean right = (x > mX) && (x + h > mX);
+		boolean top = y + h <= mH;
+		boolean bot = y >= mH;
+		boolean left = x + h <= mW;
+		boolean right = x >= mW;
 
 		if (top) {
 			if (left) {
@@ -117,25 +119,31 @@ public class QuadTree {
 	}
 
 	public List<Entity> retrieveNeighbors(Entity e) {
-		return retrieveNeighbors(e, new ArrayList<Entity>());
+		return retrieveNeighbors(e, new LinkedList<Entity>());
 	}
 
 	private List<Entity> retrieveNeighbors(Entity e, List<Entity> collection) {
-		collection.addAll(ents);
-		
-		if (nodes[0] == null) {
-			return collection;
-		}
-
 		int index = getIndex(e);
-
-		if (index == SELF) {
-			return collection;
-		} else {
+		if (index != -1 && nodes[0] != null) {
 			nodes[index].retrieveNeighbors(e, collection);
 		}
-
+		collection.addAll(ents);
 		return collection;
+	}
+
+	public void draw(Graphics g) {
+		int x = (int)bounds.x;
+		int y = (int)bounds.y;
+		int w = (int)bounds.width;
+		int h = (int)bounds.height;
+
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, w, h);
+		for (int i = 0; i < nodes.length; i++) {
+			if (nodes[i] != null) {
+				nodes[i].draw(g);
+			}
+		}
 	}
 
 }
