@@ -23,17 +23,7 @@ public class QuadTreeCollisionEngine extends CollisionEngine {
 			List<Entity> relative = tree.retrieveNeighbors(e);
 			for (int j = 0; j < relative.size(); j++) {
 				Entity neighbor = relative.get(j);
-				// Square Collisions
-				// if (neighbor != e) {
-				// 	if (neighbor.bounds.intersects(e.bounds)) {
-				// 		neighbor.vx = 0;
-				// 		neighbor.vy = 0;
-				// 		e.vx = 0;
-				// 		e.vy = 0;
-				// 	}
-				// }
 				if (neighbor != e ) {
-					// Assuming circles
 					double ecx = e.bounds.x + e.bounds.width / 2;
 					double ecy = e.bounds.y + e.bounds.height / 2;
 					double ecr = e.bounds.width / 2;
