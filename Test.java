@@ -37,7 +37,7 @@ public class Test extends JFrame implements MouseListener {
 			}
 			repaint();
 			try {
-				Thread.sleep(1000 / 200);
+				Thread.sleep(1000 / 30);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -46,7 +46,7 @@ public class Test extends JFrame implements MouseListener {
 
 	public void paint(Graphics g) {
 		for (int i = 0; i < frames.length; i++) {
-			frames[i].draw(g);	
+			frames[i].draw(getContentPane().getGraphics());	
 		}
 	}
 
@@ -55,8 +55,8 @@ public class Test extends JFrame implements MouseListener {
 		int col = e.getX() / (getHeight() / 2);
 		int cell = 2 * col + row;
 
-		int x1 = e.getY() % (getWidth() / 2);
-		int y1 = e.getY() % (getHeight() / 2);
+		double x1 = e.getX() - frames[cell].bounds.x;
+		double y1 = e.getY() - frames[cell].bounds.y;
 
 		double rvx = Math.random() * 4 - 2;
 		double rvy = Math.random() * 4 - 2;

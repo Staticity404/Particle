@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 
 public abstract class Entity {
 
 	public static final Color DEFAULT_COLOR = Color.BLACK;
 
-	public double x, y, vx, vy, width, height;
+	public Rectangle2D.Double bounds;
+	public double vx, vy;
 	public Color color;
 
 	public Entity() {
@@ -17,7 +19,7 @@ public abstract class Entity {
 	}
 
 	public Entity(double x, double y, Color color) {
-		this(x, y, 0, 0);
+		this(x, y, 0, 0, color);
 	}
 
 	public Entity(double x, double y, double vx, double vy) {
@@ -28,22 +30,35 @@ public abstract class Entity {
 		this(x, y, vx, vy, 0, 0, color);
 	}
 
-	public Entity(double x, double y, double vx, double vy, double width, double height) {
+	public Entity(double x, double y, double width, double height, double vx, double vy) {
 		this(x, y, vx, vy, width, height, DEFAULT_COLOR);
 	}
 
-	public Entity(double x, double y, double vx, double vy, double width, double height, Color color) {
-		this.x = x;
-		this.y = y;
-		this.vy = vy;
+	public Entity(double x, double y, double width, double height, double vx, double vy, Color color) {
+		this(new Rectangle2D.Double(x, y, width, height), vx, vy, color);
+	}
+
+	public Entity(Rectangle2D.Double bounds) {
+		this(bounds, DEFAULT_COLOR);
+	}
+
+	public Entity(Rectangle2D.Double bounds, Color color) {
+		this(bounds, 0, 0, color);
+	}
+
+	public Entity(Rectangle2D.Double bounds, double vx, double vy) {
+		this(bounds, vx, vy, DEFAULT_COLOR);
+	}
+
+	public Entity(Rectangle2D.Double bounds, double vx, double vy, Color color) {
+		this.bounds = bounds;
 		this.vx = vx;
-		this.width = width;
-		this.height = height;
+		this.vy = vy;
 		this.color = color;
 	}
 
 	public abstract void update();
 
-	public abstract void draw(Graphics g, int x, int y);
+	public abstract void draw(Graphics g, double x, double y);
 
 }

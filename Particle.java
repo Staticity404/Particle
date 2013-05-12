@@ -14,7 +14,7 @@ public class Particle extends Circle {
 	}
 
 	public void update() {
-		this.x += this.vx;
-		this.y += this.vy;
+		this.bounds.x += this.vx;
+		this.bounds.y += this.vy;
 	}
 }
